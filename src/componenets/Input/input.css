@@ -1,0 +1,15 @@
+.input-style input , input:focus{
+    min-width: 100px;
+    width: 100%;
+    max-width: 100%;
+    border-top: none;
+    border-left:none;
+    border-right: none;
+    font-size: 1.1rem;
+    padding: 0 0 0.4rem;
+}
+
+.input-style input:focus{
+  outline-style: none;
+  border-bottom-color: var(--highlight-green-color);
+}

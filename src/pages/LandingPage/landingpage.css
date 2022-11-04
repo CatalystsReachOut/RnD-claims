@@ -1,0 +1,20 @@
+.landing-page{
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+.landing-page_img img {
+    width: 100%;
+  }
+  
+  .landing-page > div{
+    flex: 1;
+  }
+
+  .landing-page_action{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

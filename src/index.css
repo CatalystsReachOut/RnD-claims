@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
+
+
+@tailwind base;
+
+@layer base{
+    :root{
+        --highlight-green-color : #29B475;
+        --highlight-grey-color : #84818A;
+        --highlight-light-black-color : #2E2C34;
+        font-family: 'Manrope','sans-serif';
+        box-sizing: border-box;
+    }
+}
+
+@tailwind components;
+@tailwind utilities;
+
+
+
+.homepage input:focus-within ~ label,
+.homepage input:not(:placeholder-shown) ~ label{
+    @apply transform scale-75 -translate-y-6;
+}
+
+.input-animation{
+    @apply relative h-[3rem] border-b-2 focus-within:border-primary
+}
+
+.pin-field{
+   @apply w-[4.875rem] h-[6rem] text-center text-2xl my-[2.5rem] border-[#EBEAED] border-[1px] border-solid;
+}
+
+.buttons-color{
+  @apply text-[#fff]  bg-primary;
+}
+
+.select-buttons{
+ @apply outline-none border-[1px] h-full text-secondary p-[0.25rem] rounded text-s;
+}

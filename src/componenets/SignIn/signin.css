@@ -1,0 +1,53 @@
+.signin_container{
+    flex-basis: 350px;
+}
+
+.signin_container > p:first-child{
+    font-weight: 600;
+    font-size: 36px;
+    margin-bottom: 0.8rem;
+}
+
+.iconpassword {
+    position: relative;
+}
+  
+.iconpassword .icon{
+    position: absolute;
+
+    right: 0;
+    bottom: 2px;
+    color: var(--highlight-grey-color);
+}
+
+.label{
+    height: 48px;
+    margin:2rem 0;
+}
+
+.form-controls{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+a{
+  color: var(--highlight-green-color);
+    text-decoration: none
+}
+
+button[type="submit"]{
+    background-color: var(--highlight-green-color);
+    color: #fff;
+    border: none;
+    padding: 14px 50px;
+    border-radius: 100px;
+}
+
+button[type="submit"]:hover{
+
+}
