@@ -18,7 +18,7 @@ const SideBar = () => {
                 <img src={Logo} className="mr-[0.5rem]" />
                 <div className='font-sans font-medium leading-[20px] text-[20px] text-[#16252D]'>RnD Claims</div>
             </div>
-            <div className='md:mt-[3rem] md:flex-1 flex md:block overflow-scroll flex-row '>
+            <div className='md:mt-[3rem] md:flex-1 flex md:block scrollbar-hide overflow-scroll flex-row '>
 
                 {
                     categories.map((category, index) => {
@@ -46,7 +46,7 @@ const SideBar = () => {
             </div>
 
             <div className='bg-white w-[full] p-[1rem] rounded md:mx-[0.75rem] m-0' >
-                <p className='text-extrasmall w-[9rem] box-border m-[0.25rem] mb-[0.875rem] '>Release you maximal potential software</p>
+                <p className='text-extrasmall w-[80%] m-auto text-center box-border  mb-[0.875rem] '>Release you maximal potential software</p>
                 <button className='bg-primary text-s p-[0.5rem] w-full text-center rounded text-white '>Upgrade to Pro</button>
             </div>
 

@@ -25,10 +25,10 @@ const Dashboard = () => {
             </BreadcrumbItem>
           </Breadcrumb>
 
-          <div className='flex items-center border-[1px] p-[0.0.625rem] border-solid border-[#E5E6EB] rounded-lg  box-border'>
+          <div className='flex items-center border-[1px] p-[0.0.625rem] border-solid border-[#E5E6EB] ml-[20px] md:m-0 rounded-lg  box-border'>
 
-            <FiSearch className='w-full mr-[0.625rem]' />
-            <input type="text" placeholder="search" className='h-[2.5rem] bg-transparent border-none outline-none' />
+            <FiSearch className='mr-[0.625rem]' />
+            <input type="text" placeholder="search" className='w-full  h-[2.5rem] bg-transparent border-none outline-none' />
           </div>
 
           <IoIosNotifications className='md:ml-[1rem] m-0  text-[1.5rem]' />
@@ -36,7 +36,9 @@ const Dashboard = () => {
 
         </div>
 
-        <Tickets />
+        <div className='mt-[30px]'>
+          <Tickets />
+        </div>
 
       </div>
     </div>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {BiDotsVerticalRounded} from 'react-icons/bi'
+import { BiDotsVerticalRounded } from 'react-icons/bi'
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -13,7 +13,7 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 
 import { visuallyHidden } from '@mui/utils';
 
-function createData(Incident, Description, Priority, Severity,Consulting_Client,Assigned_to,SLA_EndTime,Status,Attachments) {
+function createData(Incident, Description, Priority, Severity, Consulting_Client, Assigned_to, SLA_EndTime, Status, Attachments) {
   return {
     Incident,
     Description,
@@ -28,13 +28,13 @@ function createData(Incident, Description, Priority, Severity,Consulting_Client,
 }
 
 const rows = [
-  createData('INC221-1', 'Lorem ipsum dolor set amet', 1,'High', 'Consulting Firm','Maria Roselia','June 28,2022 14:00','Resolved',<BiDotsVerticalRounded/>),
-  createData('INC221-2', 'Lorem ipsum dolor set amet', 2,'High', 'Consulting Firm','Maria Roselia','June 28,2022 14:00','Resolved',<BiDotsVerticalRounded/>),
-  createData('INC221-3', 'Lorem ipsum dolor set amet', 3,'High', 'Consulting Firm','Maria Roselia','June 28,2022 14:00','Resolved',<BiDotsVerticalRounded/>),
-  createData('INC221-4', 'Lorem ipsum dolor set amet', 4,'High', 'Consulting Firm','Maria Roselia','June 28,2022 14:00','Resolved',<BiDotsVerticalRounded/>),
-  createData('INC221-5', 'Lorem ipsum dolor set amet', 5,'High', 'Consulting Firm','Maria Roselia','June 28,2022 14:00','Resolved',<BiDotsVerticalRounded/>),
-  createData('INC221-6', 'Lorem ipsum dolor set amet', 6,'High', 'Consulting Firm','Maria Roselia','June 28,2022 14:00','Resolved',<BiDotsVerticalRounded/>),
- 
+  createData('INC221-1', 'Lorem ipsum dolor set amet', 1, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />),
+  createData('INC221-2', 'Lorem ipsum dolor set amet', 2, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />),
+  createData('INC221-3', 'Lorem ipsum dolor set amet', 3, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />),
+  createData('INC221-4', 'Lorem ipsum dolor set amet', 4, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />),
+  createData('INC221-5', 'Lorem ipsum dolor set amet', 5, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />),
+  createData('INC221-6', 'Lorem ipsum dolor set amet', 6, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />),
+
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -125,7 +125,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const {  order, orderBy, onRequestSort } =
+  const { order, orderBy, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -134,7 +134,7 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        
+
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -185,7 +185,7 @@ export default function EnhancedTable() {
     <TableContainer>
       <Table>
         <EnhancedTableHead
-              
+
           order={order}
           orderBy={orderBy}
           onRequestSort={handleRequestSort}
@@ -194,14 +194,14 @@ export default function EnhancedTable() {
           {/* if you don't need to support IE11, you can replace the `stableSort` call with:
              rows.sort(getComparator(order, orderBy)).slice() */}
           {stableSort(rows, getComparator(order, orderBy))
-           
+
             .map((row, index) => {
-                  
+
               const labelId = `enhanced-table-checkbox-${index}`;
 
               return (
                 <TableRow>
-                      
+
                   <TableCell
                     component="th"
                     id={labelId}
@@ -221,7 +221,7 @@ export default function EnhancedTable() {
                 </TableRow>
               );
             })}
-              
+
         </TableBody>
       </Table>
     </TableContainer>
