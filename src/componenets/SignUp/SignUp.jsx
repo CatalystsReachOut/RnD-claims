@@ -7,7 +7,7 @@ import {
 
 const SignUp = ({toggleSign,SetToggleSign}) => {
   return (
-    <div className="w-[457px] px-[36px] py-[32px]">
+    <div className="md:w-[70%] w-[80%]  px-[36px] py-[32px]">
         <p className='text-2xl text-ternary mb-[12px]'>Verify</p>
         <p className='text-ternary text-s font-medium'>Please enter the authentication code</p>
             <div className="grid grid-cols-4 gap-x-[1.5rem]">

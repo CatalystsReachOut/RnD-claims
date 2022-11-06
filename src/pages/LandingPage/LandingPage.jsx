@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import lab from "../../assets/lab-exp-photo.svg";
 import SignIn from '../../componenets/SignIn/SignIn';
 import SignUp from '../../componenets/SignUp/SignUp';
@@ -6,24 +6,24 @@ import SignUp from '../../componenets/SignUp/SignUp';
 
 const LandingPage = () => {
 
-  const [toggleSign,SetToggleSign] = useState(false);
+  const [toggleSign, SetToggleSign] = useState(false);
 
   return (
-    <div className="flex flex-row">
-      
-        <div className="w-[50%]">
-            <img src={lab} alt="A lab experiment" className='w-[100%]' />
-        </div>
+    <div className="flex flex-col  md:flex-row">
 
-        <div className="flex w-[50%] justify-center items-center">
-          {
-            !toggleSign
+      <div className="md:w-[50%] w-[100%] h-[100%]">
+        <img src={lab} alt="A lab experiment" className='object-cover object-center w-[100%]' />
+      </div>
+
+      <div className="flex md:w-[50%] w-[100%] py-[60px] md:p-0 justify-center items-center">
+        {
+          !toggleSign
             ?
-            <SignIn toggleSign = {toggleSign} SetToggleSign = {SetToggleSign}/> 
-            : 
-            <SignUp toggleSign = {toggleSign} SetToggleSign = {SetToggleSign}/>
-          }
-        </div>
+            <SignIn toggleSign={toggleSign} SetToggleSign={SetToggleSign} />
+            :
+            <SignUp toggleSign={toggleSign} SetToggleSign={SetToggleSign} />
+        }
+      </div>
     </div>
   )
 }

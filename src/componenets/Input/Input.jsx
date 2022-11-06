@@ -4,11 +4,11 @@ import React from 'react'
 const Input = ({type ,title,id,name},ref) => {
   
   return (
-    <div className='homepage'>
+    <div className='input__container '>
         <input type={type}  
         id={id}
         placeholder=" "
-        name={name} ref= {ref} className="block w-full appearance-none bg-transparent focus:outline-none"/>
+        name={name} ref= {ref} className="block w-full py-[10px] appearance-none bg-transparent focus:outline-none"/>
       <label htmlFor={id} style={{color : "var(--highlight-grey-color"}} className="absolute top-3 -z-1 duration-300 origin-0">{title}</label>
         </div>
         
