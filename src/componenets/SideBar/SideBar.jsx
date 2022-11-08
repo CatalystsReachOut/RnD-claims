@@ -12,13 +12,17 @@ const SideBar = () => {
 
 
     return (
-        <div className='md:w-[20%] md:h-[100vh] h-auto w-full bg-[#EDF8F1] px-[0.75rem] py-[2rem] flex flex-col'>
+        <div className='md:w-[20%] md:h-[100vh] h-auto w-full bg-[#EDF8F1] px-[0.75rem] py-[2rem] justify-between flex flex-col'>
 
             <div className='w-full flex items-center p-[1rem]'>
                 <img src={Logo} className="mr-[0.5rem]" />
                 <div className='font-sans font-medium leading-[20px] text-[20px] text-[#16252D]'>RnD Claims</div>
             </div>
-            <div className='md:mt-[3rem] md:flex-1 flex md:block scrollbar-hide overflow-scroll flex-row '>
+
+            <div className='md:relative'>
+             
+            <div className='md:mt-[3rem] md:flex-1 flex md:block scrollbar-hide overflow-scroll flex-row md:absolute'>
+            </div>
 
                 {
                     categories.map((category, index) => {
