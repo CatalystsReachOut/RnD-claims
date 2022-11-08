@@ -25,7 +25,7 @@ const Dashboard = () => {
   return (
     <div className='sm:flex flex-col sm:flex-row'>
 
-      <div className='w-[20%] max-h-[100vh] overflow-y-scroll scrollbar-hide'>
+      <div className='w-[20%]  overflow-y-scroll scrollbar-hide'>
 
       <SideBar ref={sideRef}/>
       </div>
@@ -35,7 +35,7 @@ const Dashboard = () => {
           <Navbar showSideBar={showSideBar} hideSideBar={hideSideBar} />
         </div>
 
-        <div className='pt-[60px] md:max-h-[85vh]  max-h-[90vh] max-w-[100%] overflow-y-scroll'>
+        <div className='pt-[60px]  max-w-[100%] overflow-y-scroll overflow-x-hidden'>
           <Tickets />
         </div>
 

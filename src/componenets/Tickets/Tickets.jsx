@@ -1,13 +1,9 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef } from 'react'
 import { IoMdSearch } from 'react-icons/io'
 import { Tabs, TabList, Tab, Progress, Textarea, TabPanel, TabPanels } from '@chakra-ui/react'
 import Table from '../Table/Table'
-import plus from '../../assets/Plus.svg'
 import SelectInput from '../SelectInput/SelectInput'
-import { RiFlag2Fill } from 'react-icons/ri'
-import { BsSquareFill } from 'react-icons/bs'
-import { TbCloudUpload } from 'react-icons/tb'
-import { headCells, rows } from '../../data/data'
+
 import { BiDotsVerticalRounded } from 'react-icons/bi'
 import { Sorter } from '../../helpers/Sorter'
 import { Tag } from 'antd';
@@ -136,7 +132,7 @@ const data1 = [
 
 const Tickets = () => {
 
-  const [add, setAdd] = useState(false)
+
   const openClose = useRef(false);
 
   const open = () => {
@@ -332,8 +328,8 @@ const Tickets = () => {
 
 
   return (
-    <>
-      <Drawer open={open} close={close} openClose={openClose} />
+    <div className='md:max-h-[85vh]  max-h-[100vh]'>
+      <Drawer close={close} openClose={openClose} />
       <div className='px-[2.5rem] py-[1.375rem]' >
 
 
@@ -365,7 +361,7 @@ const Tickets = () => {
               <Tab _selected={{ borderBottom: "solid 2px #29B475", color: "#2E2C34" }} className="text-xs text-[#84818A] font-[600] text-quarternary p-[0.4rem]" textAlign="center">Resolved (20)</Tab>
             </TabList>
             <div className='flex max-w-[100%] scrollbar-hide ml-auto md:items-center gap-x-2 overflow-scroll mt-[10px] md:mt-0 justify-start'>
-              <p className='text-s font-medium whitespace-nowrap flex items-center font-[500]'>Filter by:</p>
+              <p className='text-s font-medium whitespace-nowrap flex items-center'>Filter by:</p>
 
               <SelectInput options={selectOptions[0]} />
               <SelectInput options={selectOptions[1]} />
@@ -395,7 +391,7 @@ const Tickets = () => {
         </Tabs>
 
       </div >
-    </>
+    </div>
   )
 }
 

@@ -16,7 +16,7 @@ const SideMenu = (props, ref) => {
 
 
     return (
-        <div className='sm:w-[100%]  h-auto w-full bg-[#EDF8F1] px-[0.75rem] py-[2rem] justify-between sm:flex sm:static flex-col hidden' ref={ref}>
+        <div className='sm:w-[100%] min-h-[100vh] h-[100%] w-full bg-[#EDF8F1] px-[0.75rem] py-[2rem] justify-between sm:flex sm:static flex-col hidden' ref={ref}>
 
             <div className='w-full flex justify-between items-center p-[0.5rem]'>
                 <div className='flex items-center '>

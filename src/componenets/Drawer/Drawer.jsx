@@ -8,7 +8,7 @@ import plus from '../../assets/Plus.svg'
 
 
 
-const Drawer = ({ open, close, openClose }) => {
+const Drawer = ({close, openClose }) => {
     return (
         <div 
         style={{
@@ -62,14 +62,18 @@ const Drawer = ({ open, close, openClose }) => {
                     <div className='text-s text-secondary w-[180px]'>
                         Severity
                     </div>
-                    <CustomSelect options={severityOptions} />
+                    <div className='w-[120px]'>
+                        <CustomSelect options={severityOptions} />
+                    </div>
 
                 </div>
                 <div className='flex items-center mt-[2rem] mb-[1.5rem]'>
                     <div className='text-s text-secondary w-[180px]'>
                         Priority
                     </div>
-                    <CustomSelect options={priorityOptions} />
+                    <div className="w-[80px]">
+                        <CustomSelect options={priorityOptions} />
+                    </div>
                 </div>
                 <div className='flex items-center my-[18px]'>
                     <div className='text-s text-secondary w-[180px]'>
@@ -77,7 +81,9 @@ const Drawer = ({ open, close, openClose }) => {
                     </div>
 
                     <div className='flex-1'>
-                        <CustomSelect options={firmOptions} />
+                        <div className="w-[248px]">
+                            <CustomSelect options={firmOptions} />
+                        </div>
                     </div>
                 </div>
 
@@ -87,7 +93,9 @@ const Drawer = ({ open, close, openClose }) => {
                     </div>
 
                     <div className='flex-1'>
-                        <CustomSelect options={endClientOptions} />
+                        <div className="w-[248px]">
+                            <CustomSelect options={endClientOptions} />
+                        </div>
                     </div>
                 </div>
 
@@ -97,7 +105,9 @@ const Drawer = ({ open, close, openClose }) => {
                     </div>
 
                     <div className='flex-1'>
-                        <CustomSelect options={engagementOptions} />
+                        <div className="w-[250px]">
+                            <CustomSelect options={engagementOptions} />
+                        </div>
                     </div>
                 </div>
 
