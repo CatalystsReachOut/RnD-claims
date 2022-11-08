@@ -25,6 +25,7 @@
 
 
 
+
 .input-animation {
     @apply relative border-b-2 focus-within:border-primary
 }

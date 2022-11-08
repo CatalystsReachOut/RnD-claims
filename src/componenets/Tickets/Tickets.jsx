@@ -12,14 +12,19 @@ import { TbCloudUpload } from 'react-icons/tb'
 import { headCells, rows } from '../../data/data'
 import { BiDotsVerticalRounded } from 'react-icons/bi'
 import { Sorter } from '../../helpers/Sorter'
-
+import { Tag } from 'antd';
 
 
 
 const columns = [
   {
     title: "Incident",
-    dataIndex: "incident"
+    dataIndex: "incident",
+    color: 'green',
+    sorter: {
+      compare: Sorter.DEFAULT,
+      multiple: 3
+    }
   },
   {
     title: "Description",
@@ -39,7 +44,11 @@ const columns = [
   },
   {
     title: "Severity",
-    dataIndex: "severity"
+    dataIndex: "severity",
+    sorter: {
+      compare: Sorter.DEFAULT,
+      multiple: 3
+    }
   },
   {
     title: "Consulting Client",
@@ -50,42 +59,75 @@ const columns = [
     dataIndex: "assigned_to"
   },
   {
-    title: "SLA End time",
+    title: "SLA End Time",
     dataIndex: "sla_endtime"
   },
   {
     title: "Status",
-    dataIndex: "status"
+    dataIndex: "status",
+    render: (_, { status }) => (
+      <>
+        {status.map(tag => {
+          let color = tag.length > 5 ? 'geekblue' : 'green';
+          if (tag.toLowerCase() === 'pending') {
+            color = 'yellow';
+          }
+          if (tag.toLowerCase() === 'resolved') {
+            color = 'gray';
+          }
+          return (
+            <Tag color={color} key={tag}>
+              {tag.toUpperCase()}
+            </Tag>
+          );
+        })}
+      </>
+    ),
   },
   {
     title: "Attachment",
-    dataIndex: "attachment"
+    dataIndex: "attachment",
+    render: (_, { status }) => (<BiDotsVerticalRounded />),
   },
 ];
 
+
+
+
+
 function createData(incident, description, priority, severity, consulting_client, assigned_to, sla_endtime, status, attachments) {
   return {
-      incident,
-      description,
-      priority,
-      severity,
-      consulting_client,
-      assigned_to,
-      sla_endtime,
-      status,
-      attachments
+    incident,
+    description,
+    priority,
+    severity,
+    consulting_client,
+    assigned_to,
+    sla_endtime,
+    status,
+    attachments
   };
 }
 
 
 const data = [
-  createData('INC221-1', 'Lorem ipsum dolor set amet', 1, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved'),
-  createData('INC221-2', 'Lorem ipsum dolor set amet', 2, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved'),
-  createData('INC221-3', 'Lorem ipsum dolor set amet', 3, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved'),
-  createData('INC221-4', 'Lorem ipsum dolor set amet', 4, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved'),
-  createData('INC221-5', 'Lorem ipsum dolor set amet', 5, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved'),
-  createData('INC221-6', 'Lorem ipsum dolor set amet', 6, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />)
+  createData('INC221-1', 'Lorem ipsum dolor set amet', 1, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', ["Open"], <BiDotsVerticalRounded />),
+  createData('INC221-2', 'Lorem ipsum dolor set amet', 2, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', ["Pending"], <BiDotsVerticalRounded />),
+  createData('INC221-3', 'Lorem ipsum dolor set amet', 3, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', ["In Progress"], <BiDotsVerticalRounded />),
+  createData('INC221-4', 'Lorem ipsum dolor set amet', 4, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', ["Open"], <BiDotsVerticalRounded />),
+  createData('INC221-5', 'Lorem ipsum dolor set amet', 5, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', ["Resolved"], <BiDotsVerticalRounded />),
+  createData('INC221-6', 'Lorem ipsum dolor set amet', 6, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', ["In Progress"], <BiDotsVerticalRounded />)
 ]
+
+const data1 = [
+  createData('INC221-1', 'Lorem ipsum dolor set amet', 1, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', ["Resolved"], <BiDotsVerticalRounded />),
+  createData('INC221-2', 'Lorem ipsum dolor set amet', 2, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', ["Resolved"], <BiDotsVerticalRounded />),
+  createData('INC221-3', 'Lorem ipsum dolor set amet', 3, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', ["Resolved"], <BiDotsVerticalRounded />),
+  createData('INC221-4', 'Lorem ipsum dolor set amet', 4, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', ["Resolved"], <BiDotsVerticalRounded />),
+  createData('INC221-5', 'Lorem ipsum dolor set amet', 5, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', ["Resolved"], <BiDotsVerticalRounded />),
+  createData('INC221-6', 'Lorem ipsum dolor set amet', 6, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', ["Resolved"], <BiDotsVerticalRounded />)
+]
+
 
 const Tickets = () => {
 
@@ -416,10 +458,10 @@ const Tickets = () => {
 
         <h1 className='text-[1.75rem] font-semibold leading-[3rem] flex-auto'>Tickets</h1>
 
-        <div className='flex px-[1rem] py-[0.875rem] items-center border-[1px] shadow-md md:w-[14rem] w-[100%] rounded box-border'>
+        <div className='flex px-[0.75rem] py-[0.5rem] items-center border-[1px] shadow-md md:w-[14rem] w-[100%] rounded box-border'>
 
           <input type="text" placeholder="search" className=' w-full bg-transparent border-none outline-none ' />
-          <IoMdSearch className='mx-[0.625rem]' />
+          <IoMdSearch className=' h-[25px] w-[25px] mr-auto' />
 
         </div>
         <button onClick={() => open()} className='flex items-center gap-4 buttons-color text-center text-s py-[0.875rem] px-[2.5rem] md:ml-[1.5rem] mx-[0] mt-[10px] md:mt-0 rounded'>
@@ -541,11 +583,11 @@ const Tickets = () => {
       <Tabs isLazy className='flex-auto'>
         <div className='flex items-center flex-col md:flex-row mt-[2rem] mb-[3rem]'>
           <TabList>
-            <Tab _selected={{ borderBottom: "solid 2px #29B475", color: "#84818A" }} className="text-xs text-quarternary p-[0.4rem]" textAlign="center" mr="1rem">Active (20)</Tab>
-            <Tab _selected={{ borderBottom: "solid 2px #29B475", color: "#84818A" }} className="text-xs text-quarternary p-[0.4rem]" textAlign="center">Resolved (20)</Tab>
+            <Tab _selected={{ borderBottom: "solid 2px #29B475", color: "#2E2C34" }} className="text-xs text-[#84818A] font-[600] text-quarternary p-[0.4rem]" textAlign="center" mr="1rem">Active (20)</Tab>
+            <Tab _selected={{ borderBottom: "solid 2px #29B475", color: "#2E2C34" }} className="text-xs text-[#84818A] font-[600] text-quarternary p-[0.4rem]" textAlign="center">Resolved (20)</Tab>
           </TabList>
-          <div className='flex max-w-[100%] scrollbar-hide md:items-center gap-x-2 overflow-scroll mt-[10px] md:mt-0 justify-start'>
-            <p className='text-s font-medium whitespace-nowrap flex items-center'>Filter by:</p>
+          <div className='flex max-w-[100%] scrollbar-hide ml-auto md:items-center gap-x-2 overflow-scroll mt-[10px] md:mt-0 justify-start'>
+            <p className='text-s font-medium whitespace-nowrap flex items-center font-[500]'>Filter by:</p>
 
 
             <SelectInput options={selectOptions[0]} />
@@ -559,14 +601,18 @@ const Tickets = () => {
 
 
         </div>
-        <TabPanels  >
-          <TabPanel>
-            <Table columns={columns} dataSource={data} />
-          </TabPanel>
-          <TabPanel>
-            <p>two!</p>
-          </TabPanel>
-        </TabPanels>
+        <div className=''>
+
+          <TabPanels >
+            <TabPanel>
+              <Table columns={columns} dataSource={data} pagination={{ pageSize: 50 }} scroll={{ y: '200px' }} className="whitespace-none"  />
+            </TabPanel>
+            <TabPanel>
+              <Table columns={columns} dataSource={data1} pagination={{ pageSize: 50 }} scroll={{ y: '200px' }} className="whitespace-none" />
+            </TabPanel>
+          </TabPanels>
+
+        </div>
 
       </Tabs>
 

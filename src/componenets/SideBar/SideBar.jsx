@@ -12,17 +12,17 @@ const SideBar = () => {
 
 
     return (
-        <div className='md:w-[20%] md:h-[100vh] h-auto w-full bg-[#EDF8F1] px-[0.75rem] py-[2rem] justify-between flex flex-col'>
+        <div className='md:w-[100%]  h-[100%] w-full bg-[#EDF8F1] px-[0.75rem] py-[0.5rem] justify-between flex flex-col'>
 
             <div className='w-full flex items-center p-[1rem]'>
                 <img src={Logo} className="mr-[0.5rem]" />
-                <div className='font-sans font-medium leading-[20px] text-[20px] text-[#16252D]'>RnD Claims</div>
+                <div className='font-sans font-medium leading-[20px] text-[20px] text-[#16252D] whitespace-nowrap'>RnD Claims</div>
             </div>
 
-            <div className='md:relative'>
-             
-            <div className='md:mt-[3rem] md:flex-1 flex md:block scrollbar-hide overflow-scroll flex-row md:absolute'>
-            </div>
+            <div className='md:relative mt-[50px]'>
+
+                <div className='md:mt-[3rem] md:flex-1 flex md:block scrollbar-hide overflow-scroll flex-row md:absolute'>
+                </div>
 
                 {
                     categories.map((category, index) => {
@@ -48,10 +48,10 @@ const SideBar = () => {
                     })
                 }
             </div>
-
+            
             <div className='bg-white w-[full] p-[1rem] rounded md:mx-[0.75rem] m-0' >
-                <p className='text-extrasmall w-[80%] m-auto text-center box-border  mb-[0.875rem] '>Release you maximal potential software</p>
-                <button className='bg-primary text-s p-[0.5rem] w-full text-center rounded text-white '>Upgrade to Pro</button>
+                <p className='text-extrasmall w-[80%] m-auto text-center box-border  mb-[0.875rem]'>Release you maximal potential software</p>
+                <button className='bg-primary text-s p-[0.5rem] w-full text-center rounded text-white'>Upgrade to Pro</button>
             </div>
 
 
