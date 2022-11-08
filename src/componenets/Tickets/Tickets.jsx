@@ -442,7 +442,7 @@ const Tickets = () => {
           borderTop: "1px solid #e9e9e9",
           minHeight: "100vh",
           transition: "0.5s"
-        }} ref={openClose} id="formContainer">
+        }} ref={openClose} id="formContainer" onSubmit={(e) => e.preventDefault()}>
           <div className='flex justify-between items-center'>
             <h1 className='text-2xl text-[1.75rem] mb-[1rem]'>Name of the ticket</h1>
             <GrClose onClick={(e) => close(e)} className="cursor-pointer" id='close-button' />

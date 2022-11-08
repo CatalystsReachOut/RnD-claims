@@ -1,18 +1,39 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import SideBar from '../../componenets/SideBar/SideBar'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/breadcrumb';
 import { IoIosNotifications } from 'react-icons/io'
 import { FiSearch } from 'react-icons/fi'
 import Tickets from '../../componenets/Tickets/Tickets';
+import {GiHamburgerMenu} from 'react-icons/gi'
 
 
 const Dashboard = () => {
+
+  const sideRef = useRef(false);
+
+  const showSideBar = (e) => {
+    e.preventDefault();
+    sideRef.current.style.display = "flex",
+    sideRef.current.style.position ="absolute",
+    sideRef.current.style.zIndex ="999"
+  }
+  const hideSideBar = (e) => {
+    e.preventDefault();
+    sideRef.current.style.display = "none",
+    sideRef.current.style.position ="absolute",
+    sideRef.current.style.zIndex ="999"
+  }
+
   return (
-    <div className='flex flex-col md:flex-row'>
-      <SideBar />
+    <div className='sm:flex flex-col sm:flex-row'>
+      <SideBar ref={sideRef}/>
       <div className='w-full'>
 
         <div className='flex flex-auto justify-center items-center px-[2.5rem] py-[1.5rem] bg-[#FBFAFC] h-[4.375rem] drop-shadow-md w-full'>
+
+          <div className='sm:hidden'>
+            <GiHamburgerMenu className='mr-4' onClick={showSideBar}/>
+          </div>
 
           <Breadcrumb className='font-medium flex-auto'>
 
