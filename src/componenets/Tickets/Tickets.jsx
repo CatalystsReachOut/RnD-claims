@@ -1,18 +1,95 @@
-import React, { useState ,useRef} from 'react'
+import React, { useState, useRef } from 'react'
 import { IoMdSearch } from 'react-icons/io'
-import { Tabs, TabList, Tab, Progress, Textarea } from '@chakra-ui/react'
-import Tables from '../Tables/Tables'
+import { Tabs, TabList, Tab, Progress, Textarea, TabPanel, TabPanels } from '@chakra-ui/react'
+import Table from '../Table/Table'
 import { GrClose } from 'react-icons/gr'
 import plus from '../../assets/Plus.svg'
 import SelectInput from '../SelectInput/SelectInput'
 import CustomSelect from '../CustomSelect/CustomSelect'
-import {RiFlag2Fill} from 'react-icons/ri'
-import {BsSquareFill} from 'react-icons/bs'
-import {TbCloudUpload} from 'react-icons/tb'
+import { RiFlag2Fill } from 'react-icons/ri'
+import { BsSquareFill } from 'react-icons/bs'
+import { TbCloudUpload } from 'react-icons/tb'
+import { headCells, rows } from '../../data/data'
+import { BiDotsVerticalRounded } from 'react-icons/bi'
+import { Sorter } from '../../helpers/Sorter'
+
+
+
+
+const columns = [
+  {
+    title: "Incident",
+    dataIndex: "incident"
+  },
+  {
+    title: "Description",
+    dataIndex: "description",
+    sorter: {
+      compare: Sorter.DEFAULT,
+      multiple: 3
+    }
+  },
+  {
+    title: "Priority",
+    dataIndex: "priority",
+    sorter: {
+      compare: Sorter.DEFAULT,
+      multiple: 2
+    }
+  },
+  {
+    title: "Severity",
+    dataIndex: "severity"
+  },
+  {
+    title: "Consulting Client",
+    dataIndex: "consulting_client"
+  },
+  {
+    title: "Assigned to",
+    dataIndex: "assigned_to"
+  },
+  {
+    title: "SLA End time",
+    dataIndex: "sla_endtime"
+  },
+  {
+    title: "Status",
+    dataIndex: "status"
+  },
+  {
+    title: "Attachment",
+    dataIndex: "attachment"
+  },
+];
+
+function createData(incident, description, priority, severity, consulting_client, assigned_to, sla_endtime, status, attachments) {
+  return {
+      incident,
+      description,
+      priority,
+      severity,
+      consulting_client,
+      assigned_to,
+      sla_endtime,
+      status,
+      attachments
+  };
+}
+
+
+const data = [
+  createData('INC221-1', 'Lorem ipsum dolor set amet', 1, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved'),
+  createData('INC221-2', 'Lorem ipsum dolor set amet', 2, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved'),
+  createData('INC221-3', 'Lorem ipsum dolor set amet', 3, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved'),
+  createData('INC221-4', 'Lorem ipsum dolor set amet', 4, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved'),
+  createData('INC221-5', 'Lorem ipsum dolor set amet', 5, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved'),
+  createData('INC221-6', 'Lorem ipsum dolor set amet', 6, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />)
+]
 
 const Tickets = () => {
 
-  const [add,setAdd] = useState(false)
+  const [add, setAdd] = useState(false)
   const openClose = useRef(false);
 
   const open = () => {
@@ -21,8 +98,8 @@ const Tickets = () => {
 
   const close = (e) => {
 
-    if(e.target.matches("#close-button")){
-      
+    if (e.target.matches("#close-button")) {
+
       openClose.current.style.display = "none";
     }
   }
@@ -37,121 +114,122 @@ const Tickets = () => {
 
   const statusOptions = [
     {
-      label:<div className='flex items-center gap-2'><BsSquareFill className='text-gray-500 capitalize'/>open</div>,
-      value:"open"
+      label: <div className='flex items-center gap-2'><BsSquareFill className='text-gray-500 capitalize' />open</div>,
+      value: "open"
     },
     {
-      label:<div className='flex items-center gap-2'><BsSquareFill className='text-orange-500 capitalize'/>In Progress</div>,
-      value:"in progress",
-      bgcolor:"var(--highlight-green-color)"
+      label: <div className='flex items-center gap-2'><BsSquareFill className='text-orange-500 capitalize' /> In Progress</div>,
+      value: "in progress",
+      bgcolor: "var(--highlight-green-color)"
     },
     {
-      label:<div className='flex items-center gap-2'><BsSquareFill className='text-yellow-600 capitalize'/>in review</div>,
-      value:"in review"
+      label: <div className='flex items-center gap-2'><BsSquareFill className='text-yellow-600 capitalize' /> In review</div>,
+      value: "in review"
     },
     {
-      label:<div className='flex items-center gap-2'><BsSquareFill className='text-red-600 capitalize'/>blocked</div>,
-      value:"blocked"
+      label: <div className='flex items-center gap-2'><BsSquareFill className='text-red-600 capitalize' /> Blocked</div>,
+      value: "blocked"
     },
-    {label:<div className='flex items-center gap-2'><BsSquareFill className='text-green-700 capitalize'/>closed</div>,
-      value:"closed"
+    {
+      label: <div className='flex items-center gap-2'><BsSquareFill className='text-green-700 capitalize' /> Closed</div>,
+      value: "closed"
     },
   ]
 
-  const severityOptions=[
+  const severityOptions = [
     {
-        label: <div className='flex items-center gap-2 '> <RiFlag2Fill className='text-[red]'/> Urgent </div>,
-        value:'Urgent'
+      label: <div className='flex items-center gap-2 '> <RiFlag2Fill className='text-[red]' /> Urgent </div>,
+      value: 'Urgent'
     },
     {
-        label: <div className='flex items-center gap-2 '> <RiFlag2Fill className='text-[orange]'/> High </div>,
-        value:'High'
+      label: <div className='flex items-center gap-2 '> <RiFlag2Fill className='text-[orange]' /> High </div>,
+      value: 'High'
     },
     {
-        label: <div className='flex items-center gap-2 '> <RiFlag2Fill className='text-[blue]'/> Normal </div>,
-        value:'Normal'
+      label: <div className='flex items-center gap-2 '> <RiFlag2Fill className='text-[blue]' /> Normal </div>,
+      value: 'Normal'
     },
     {
-        label: <div className='flex items-center gap-2 '> <RiFlag2Fill className='text-[grey]'/> Low </div>,
-        value:'Low'
+      label: <div className='flex items-center gap-2 '> <RiFlag2Fill className='text-[grey]' /> Low </div>,
+      value: 'Low'
     },
-]
+  ]
 
-const priorityOptions = [
-  {
-    label: <div> 1 </div>,
-    value:'1'
-  },
-  {
-    label: <div> 2 </div>,
-    value:'2'
-  },
-  {
-    label: <div>3</div>,
-    value:'3'
-  },
-  {
-    label: <div>4</div>,
-    value:'4'
-  },
+  const priorityOptions = [
+    {
+      label: <div> 1 </div>,
+      value: '1'
+    },
+    {
+      label: <div> 2 </div>,
+      value: '2'
+    },
+    {
+      label: <div>3</div>,
+      value: '3'
+    },
+    {
+      label: <div>4</div>,
+      value: '4'
+    },
 
-]
+  ]
 
-const firmOptions = [
-  {
-    label: <div>Option 1</div>,
-    value:'Option 1'
-  },
-  {
-    label: <div> Apex India </div>,
-    value:'Apex India'
-  },
-  {
-    label: <div>Option 3</div>,
-    value:'Option 3'
-  },
-  {
-    label: <div>Option 4</div>,
-    value:'Option 4'
-  },
-]
+  const firmOptions = [
+    {
+      label: <div>Option 1</div>,
+      value: 'Option 1'
+    },
+    {
+      label: <div> Apex India </div>,
+      value: 'Apex India'
+    },
+    {
+      label: <div>Option 3</div>,
+      value: 'Option 3'
+    },
+    {
+      label: <div>Option 4</div>,
+      value: 'Option 4'
+    },
+  ]
 
-const endClientOptions = [
-  {
-    label: <div>Option 1</div>,
-    value:'Option 1'
-  },
-  {
-    label: <div> Tata Group </div>,
-    value:'Tata Group'
-  },
-  {
-    label: <div>Option 3</div>,
-    value:'Option 3'
-  },
-  {
-    label: <div>Option 4</div>,
-    value:'Option 4'
-  },
-]
-const engagementOptions = [
-  {
-    label: <div>Option 1</div>,
-    value:'Option 1'
-  },
-  {
-    label: <div> Tata Safari </div>,
-    value:'Tata Safari'
-  },
-  {
-    label: <div>Option 3</div>,
-    value:'Option 3'
-  },
-  {
-    label: <div>Option 4</div>,
-    value:'Option 4'
-  },
-]
+  const endClientOptions = [
+    {
+      label: <div>Option 1</div>,
+      value: 'Option 1'
+    },
+    {
+      label: <div> Tata Group </div>,
+      value: 'Tata Group'
+    },
+    {
+      label: <div>Option 3</div>,
+      value: 'Option 3'
+    },
+    {
+      label: <div>Option 4</div>,
+      value: 'Option 4'
+    },
+  ]
+  const engagementOptions = [
+    {
+      label: <div>Option 1</div>,
+      value: 'Option 1'
+    },
+    {
+      label: <div> Tata Safari </div>,
+      value: 'Tata Safari'
+    },
+    {
+      label: <div>Option 3</div>,
+      value: 'Option 3'
+    },
+    {
+      label: <div>Option 4</div>,
+      value: 'Option 4'
+    },
+  ]
 
   const selectOptions = [
     {
@@ -209,116 +287,124 @@ const engagementOptions = [
         }]
     },
 
-    { name: "Client", inputs: [
-      {
-        label: "Client",
-        value: "null",
-        selected: true
-      },
-      {
-        label: "Option1",
-        value: "Option1",
-        selected: false
-      },
-      {
-        label: "Option2",
-        value: "Option2",
-        selected: false
-      },
-      {
-        label: "Option3",
-        value: "Option3",
-        selected: false
-      },
-      {
-        label: "Option4",
-        value: "Option4",
-        selected: false
-      }
-    ] },
+    {
+      name: "Client", inputs: [
+        {
+          label: "Client",
+          value: "null",
+          selected: true
+        },
+        {
+          label: "Option1",
+          value: "Option1",
+          selected: false
+        },
+        {
+          label: "Option2",
+          value: "Option2",
+          selected: false
+        },
+        {
+          label: "Option3",
+          value: "Option3",
+          selected: false
+        },
+        {
+          label: "Option4",
+          value: "Option4",
+          selected: false
+        }
+      ]
+    },
 
-    { name: "Assigned to", inputs:[
-      {
-        label: "Assigned to",
-        value: "null",
-        selected: true
-      },
-      {
-        label: "Option1",
-        value: "Option1",
-        selected: false
-      },
-      {
-        label: "Option2",
-        value: "Option2",
-        selected: false
-      },
-      {
-        label: "Option3",
-        value: "Option3",
-        selected: false
-      },
-      {
-        label: "Option4",
-        value: "Option4",
-        selected: false
-      }
-    ] },
-    { name: "Status", inputs: [
-      {
-        label: "Status",
-        value: "null",
-        selected: true
-      },
-      {
-        label: "Option1",
-        value: "Option1",
-        selected: false
-      },
-      {
-        label: "Option2",
-        value: "Option2",
-        selected: false
-      },
-      {
-        label: "Option3",
-        value: "Option3",
-        selected: false
-      },
-      {
-        label: "Option4",
-        value: "Option4",
-        selected: false
-      }
-    ] },
+    {
+      name: "Assigned to", inputs: [
+        {
+          label: "Assigned to",
+          value: "null",
+          selected: true
+        },
+        {
+          label: "Option1",
+          value: "Option1",
+          selected: false
+        },
+        {
+          label: "Option2",
+          value: "Option2",
+          selected: false
+        },
+        {
+          label: "Option3",
+          value: "Option3",
+          selected: false
+        },
+        {
+          label: "Option4",
+          value: "Option4",
+          selected: false
+        }
+      ]
+    },
+    {
+      name: "Status", inputs: [
+        {
+          label: "Status",
+          value: "null",
+          selected: true
+        },
+        {
+          label: "Option1",
+          value: "Option1",
+          selected: false
+        },
+        {
+          label: "Option2",
+          value: "Option2",
+          selected: false
+        },
+        {
+          label: "Option3",
+          value: "Option3",
+          selected: false
+        },
+        {
+          label: "Option4",
+          value: "Option4",
+          selected: false
+        }
+      ]
+    },
 
-    { name: "Status", inputs: [
-      {
-        label: "Status",
-        value: "null",
-        selected: true
-      },
-      {
-        label: 1,
-        value: 1,
-        selected: false
-      },
-      {
-        label: 2,
-        value: 2,
-        selected: false
-      },
-      {
-        label: 3,
-        value: 3,
-        selected: false
-      },
-      {
-        label: 4,
-        value: 4,
-        selected: false
-      }  
-    ] },
+    {
+      name: "Status", inputs: [
+        {
+          label: "Status",
+          value: "null",
+          selected: true
+        },
+        {
+          label: 1,
+          value: 1,
+          selected: false
+        },
+        {
+          label: 2,
+          value: 2,
+          selected: false
+        },
+        {
+          label: 3,
+          value: 3,
+          selected: false
+        },
+        {
+          label: 4,
+          value: 4,
+          selected: false
+        }
+      ]
+    },
   ]
 
 
@@ -349,21 +435,21 @@ const engagementOptions = [
           right: "0px",
           top: "0px",
           width: "500px",
-          display:"none" , 
+          display: "none",
           padding: "3rem 2.25rem",
           zIndex: "999",
           background: "#fff",
           borderTop: "1px solid #e9e9e9",
           minHeight: "100vh",
-          transition:"0.5s"
-        }} ref = {openClose} id="formContainer">
+          transition: "0.5s"
+        }} ref={openClose} id="formContainer">
           <div className='flex justify-between items-center'>
             <h1 className='text-2xl text-[1.75rem] mb-[1rem]'>Name of the ticket</h1>
             <GrClose onClick={(e) => close(e)} className="cursor-pointer" id='close-button' />
           </div>
 
           <div className='w-[180px]'>
-            <CustomSelect options={statusOptions}/>
+            <CustomSelect options={statusOptions} />
           </div>
 
           <div className="assign flex mt-[2.5rem] items-center">
@@ -389,7 +475,7 @@ const engagementOptions = [
             <div className='text-s text-secondary w-[180px]'>
               Severity
             </div>
-            <CustomSelect options={severityOptions}/>
+            <CustomSelect options={severityOptions} />
 
           </div>
           <div className='flex items-center mt-[2rem] mb-[1.5rem]'>
@@ -402,7 +488,7 @@ const engagementOptions = [
             <div className='text-s text-secondary w-[180px]'>
               Consulting Firm
             </div>
-            
+
             <div className='flex-1'>
               <CustomSelect options={firmOptions} />
             </div>
@@ -412,7 +498,7 @@ const engagementOptions = [
             <div className='text-s text-secondary w-[180px]'>
               End Client
             </div>
-            
+
             <div className='flex-1'>
               <CustomSelect options={endClientOptions} />
             </div>
@@ -422,7 +508,7 @@ const engagementOptions = [
             <div className='text-s text-secondary w-[180px]'>
               Engagement
             </div>
-            
+
             <div className='flex-1'>
               <CustomSelect options={engagementOptions} />
             </div>
@@ -432,12 +518,12 @@ const engagementOptions = [
             <div className='text-s text-secondary w-[180px]'>
               Detailed Description
             </div>
-            
+
             <textarea className='flex-1 text-s resize-none border-2 rounded outline-none' placeholder='Lorem ipsum dolor sit amet consectetur adipisicing elit'></textarea>
           </div>
 
           <div className='flex flex-col items-center border-secondary border-dashed border-2 p-4 rounded'>
-            <TbCloudUpload className='text-[3.75rem] text-secondary'/>
+            <TbCloudUpload className='text-[3.75rem] text-secondary' />
             <p className='font-Manrope leading-6 font-medium text-[17px] text-primary'>Upload Media here</p>
             <p className='font-Manrope leading-4 text-[0.75em] font-medium text-secondary'>Image can be size of 512 PX by 512 PX Only</p>
           </div>
@@ -452,26 +538,38 @@ const engagementOptions = [
 
       </div>
 
-      <div className='flex items-center flex-col md:flex-row mt-[2rem] mb-[3rem]'>
-        <Tabs isLazy className='flex-auto'>
+      <Tabs isLazy className='flex-auto'>
+        <div className='flex items-center flex-col md:flex-row mt-[2rem] mb-[3rem]'>
           <TabList>
-            <Tab _selected={{ borderBottom: "solid 2px #29B475", color: "#84818A" }} className="text-xs text-quarternary p-[0.4rem]" textAlign="center" mr="1rem">Active</Tab>
-            <Tab _selected={{ borderBottom: "solid 2px #29B475", color: "#84818A" }} className="text-xs text-quarternary p-[0.4rem]" textAlign="center">Resolved</Tab>
+            <Tab _selected={{ borderBottom: "solid 2px #29B475", color: "#84818A" }} className="text-xs text-quarternary p-[0.4rem]" textAlign="center" mr="1rem">Active (20)</Tab>
+            <Tab _selected={{ borderBottom: "solid 2px #29B475", color: "#84818A" }} className="text-xs text-quarternary p-[0.4rem]" textAlign="center">Resolved (20)</Tab>
           </TabList>
-        </Tabs>
-        <div className='flex max-w-[100%] scrollbar-hide md:items-center gap-x-2 overflow-scroll mt-[10px] md:mt-0 justify-start'>
-          <p className='text-s font-medium whitespace-nowrap flex items-center'>Filter by:</p>
-          
+          <div className='flex max-w-[100%] scrollbar-hide md:items-center gap-x-2 overflow-scroll mt-[10px] md:mt-0 justify-start'>
+            <p className='text-s font-medium whitespace-nowrap flex items-center'>Filter by:</p>
 
-          <SelectInput options={selectOptions[0]} />
-          <SelectInput options={selectOptions[1]} />
-          <SelectInput options={selectOptions[2]} />
-          <SelectInput options={selectOptions[3]} />
-          
+
+            <SelectInput options={selectOptions[0]} />
+            <SelectInput options={selectOptions[1]} />
+            <SelectInput options={selectOptions[2]} />
+            <SelectInput options={selectOptions[3]} />
+
+          </div>
+
+
+
+
         </div>
+        <TabPanels  >
+          <TabPanel>
+            <Table columns={columns} dataSource={data} />
+          </TabPanel>
+          <TabPanel>
+            <p>two!</p>
+          </TabPanel>
+        </TabPanels>
 
-      </div>
-      <Tables />
+      </Tabs>
+
     </div >
   )
 }

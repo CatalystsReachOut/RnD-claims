@@ -6,7 +6,7 @@ import WhiteStar from '../../assets/White-Star.svg'
 
 const SideBar = () => {
 
-    const categories = ["dashboard", "tickets", "consulting firms", "users", "settings", "data requests", "reports"];
+    const categories = ["Dashboard", "Tickets", "Consulting Firms", "Users", "Settings", "Data Requests", "Reports"];
 
     const [active, setActive] = useState(0);
 

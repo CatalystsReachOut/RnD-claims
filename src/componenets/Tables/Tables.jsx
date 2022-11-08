@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { BiDotsVerticalRounded } from 'react-icons/bi'
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -13,29 +12,9 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 
 import { visuallyHidden } from '@mui/utils';
 
-function createData(Incident, Description, Priority, Severity, Consulting_Client, Assigned_to, SLA_EndTime, Status, Attachments) {
-  return {
-    Incident,
-    Description,
-    Priority,
-    Severity,
-    Consulting_Client,
-    Assigned_to,
-    SLA_EndTime,
-    Status,
-    Attachments
-  };
-}
 
-const rows = [
-  createData('INC221-1', 'Lorem ipsum dolor set amet', 1, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />),
-  createData('INC221-2', 'Lorem ipsum dolor set amet', 2, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />),
-  createData('INC221-3', 'Lorem ipsum dolor set amet', 3, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />),
-  createData('INC221-4', 'Lorem ipsum dolor set amet', 4, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />),
-  createData('INC221-5', 'Lorem ipsum dolor set amet', 5, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />),
-  createData('INC221-6', 'Lorem ipsum dolor set amet', 6, 'High', 'Consulting Firm', 'Maria Roselia', 'June 28,2022 14:00', 'Resolved', <BiDotsVerticalRounded />),
 
-];
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -56,73 +35,18 @@ function getComparator(order, orderBy) {
 // This method is created for cross-browser compatibility, if you don't
 // need to support IE11, you can use Array.prototype.sort() directly
 function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
+  const stabilizedThis = array?.map((el, index) => [el, index]);
+  stabilizedThis?.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) {
       return order;
     }
     return a[1] - b[1];
   });
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis?.map((el) => el[0]);
 }
 
-const headCells = [
-  {
-    id: 'Incident',
-    numeric: false,
-    disablePadding: true,
-    label: 'Incident',
-  },
-  {
-    id: 'Description',
-    numeric: false,
-    disablePadding: false,
-    label: 'Description',
-  },
-  {
-    id: 'Priority',
-    numeric: true,
-    disablePadding: false,
-    label: 'Priority',
-  },
-  {
-    id: 'Severity',
-    numeric: true,
-    disablePadding: false,
-    label: 'Severity',
-  },
-  {
-    id: 'Consulting_Client',
-    numeric: true,
-    disablePadding: false,
-    label: 'Consulting Client',
-  },
-  {
-    id: 'Assigned_to',
-    numeric: true,
-    disablePadding: false,
-    label: 'Assigned to',
-  },
-  {
-    id: 'SLA_End_time',
-    numeric: true,
-    disablePadding: false,
-    label: 'SLA End Time',
-  },
-  {
-    id: 'Status',
-    numeric: true,
-    disablePadding: false,
-    label: 'Status',
-  },
-  {
-    id: 'Attachments',
-    numeric: true,
-    disablePadding: false,
-    label: 'Attachments',
-  },
-];
+
 
 function EnhancedTableHead(props) {
   const { order, orderBy, onRequestSort } =
@@ -135,7 +59,7 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
 
-        {headCells.map((headCell) => (
+        {props?.headCells && props?.headCells?.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={'left'}
@@ -169,7 +93,7 @@ EnhancedTableHead.propTypes = {
 };
 
 
-export default function EnhancedTable() {
+export default function EnhancedTable({ rows, headCells, head }) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('Incident');
   const handleRequestSort = (event, property) => {
@@ -185,17 +109,14 @@ export default function EnhancedTable() {
     <TableContainer>
       <Table>
         <EnhancedTableHead
-
+          headCells={headCells}
           order={order}
           orderBy={orderBy}
           onRequestSort={handleRequestSort}
         />
         <TableBody>
-          {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-             rows.sort(getComparator(order, orderBy)).slice() */}
-          {stableSort(rows, getComparator(order, orderBy))
-
-            .map((row, index) => {
+          
+          {stableSort(rows, getComparator(order, orderBy))?.map((row, index) => {
 
               const labelId = `enhanced-table-checkbox-${index}`;
 
