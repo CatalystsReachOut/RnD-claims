@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import SideBar from '../../componenets/SideBar/SideBar'
 
 import Tickets from '../../componenets/Tickets/Tickets';
@@ -6,18 +6,36 @@ import Navbar from '../../componenets/Navbar/Navbar';
 
 
 const Dashboard = () => {
-  return (
-    <div className='flex flex-col max-h-[100vh] relative md:flex-row'>
 
-      <div className='w-[25%] flex max-h-100vh overflow-y-scroll scrollbar-hide'>
-        <SideBar />
+  const sideRef = useRef(false);
+
+  const showSideBar = (e) => {
+    e.preventDefault();
+    sideRef.current.style.display = "flex",
+    sideRef.current.style.position ="absolute",
+    sideRef.current.style.zIndex ="999"
+  }
+  const hideSideBar = (e) => {
+    e.preventDefault();
+    sideRef.current.style.display = "none",
+    sideRef.current.style.position ="absolute",
+    sideRef.current.style.zIndex ="999"
+  }
+
+  return (
+    <div className='sm:flex flex-col sm:flex-row'>
+
+      <div className='w-[20%] max-h-[100vh] overflow-y-scroll scrollbar-hide'>
+
+      <SideBar ref={sideRef}/>
       </div>
-      <div className='w-full'>
-        <div className='pb-[45px] relative'>
-          <Navbar />
+      <div className='md:w-[80%] w-[100%] '>
+
+        <div className="relative w-full">
+          <Navbar showSideBar={showSideBar} hideSideBar={hideSideBar} />
         </div>
 
-        <div className='mt-[30px] max-h-[85vh] overflow-y-scroll'>
+        <div className='pt-[60px] md:max-h-[85vh]  max-h-[90vh] max-w-[100%] overflow-y-scroll'>
           <Tickets />
         </div>
 

@@ -2,26 +2,33 @@ import React, { useState } from 'react'
 import Logo from '../../assets/Logo.svg'
 import Star from '../../assets/Star.svg'
 import WhiteStar from '../../assets/White-Star.svg'
+import { GrClose } from 'react-icons/gr'
 
 
-const SideBar = () => {
+
+const SideMenu = (props, ref) => {
 
     const categories = ["Dashboard", "Tickets", "Consulting Firms", "Users", "Settings", "Data Requests", "Reports"];
 
     const [active, setActive] = useState(0);
 
 
-    return (
-        <div className='md:w-[100%]  h-[100%] w-full bg-[#EDF8F1] px-[0.75rem] py-[0.5rem] justify-between flex flex-col'>
 
-            <div className='w-full flex items-center p-[1rem]'>
-                <img src={Logo} className="mr-[0.5rem]" />
-                <div className='font-sans font-medium leading-[20px] text-[20px] text-[#16252D] whitespace-nowrap'>RnD Claims</div>
+
+    return (
+        <div className='sm:w-[100%]  h-auto w-full bg-[#EDF8F1] px-[0.75rem] py-[2rem] justify-between sm:flex sm:static flex-col hidden' ref={ref}>
+
+            <div className='w-full flex justify-between items-center p-[0.5rem]'>
+                <div className='flex items-center '>
+                    <img src={Logo} className="mr-[0.5rem]" />
+                    <div className='font-sans font-medium leading-[20px] text-[20px] whitespace-nowrap text-[#16252D]'>RnD Claims</div>
+                </div>
+                <GrClose className='sm:hidden' onClick={() => ref.current.style.display = "none"} />
             </div>
 
-            <div className='md:relative mt-[50px]'>
+            <div className='md:relative '>
 
-                <div className='md:mt-[3rem] md:flex-1 flex md:block scrollbar-hide overflow-scroll flex-row md:absolute'>
+                <div className='md:mt-[3rem] md:flex-1 flex md:block scrollbar-hide overflow-scroll flex-row '>
                 </div>
 
                 {
@@ -48,7 +55,7 @@ const SideBar = () => {
                     })
                 }
             </div>
-            
+
             <div className='bg-white w-[full] p-[1rem] rounded md:mx-[0.75rem] m-0' >
                 <p className='text-extrasmall w-[80%] m-auto text-center box-border  mb-[0.875rem]'>Release you maximal potential software</p>
                 <button className='bg-primary text-s p-[0.5rem] w-full text-center rounded text-white'>Upgrade to Pro</button>
@@ -58,5 +65,7 @@ const SideBar = () => {
         </div>
     )
 }
+
+const SideBar = React.forwardRef(SideMenu)
 
 export default SideBar
