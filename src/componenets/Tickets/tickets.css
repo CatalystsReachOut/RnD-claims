@@ -1,0 +1,16 @@
+.ant-tag-green{
+    color:var(--highlight-green-color);
+    background-color: rgba(32, 201, 172, 0.1);
+}
+.ant-tag-blue{
+  color:#5542F6;
+  background-color: rgba(85, 66, 246, 0.1);
+}
+.ant-tag-yellow{
+  color: #FFA043;
+  background-color: rgba(255, 160, 67, 0.1);
+}
+.ant-tag-has-color{
+    color : var(--highlight-grey-color);
+    background:rgba(182, 180, 186, 0.1) !important;
+}

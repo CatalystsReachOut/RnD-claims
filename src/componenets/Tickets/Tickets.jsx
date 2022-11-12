@@ -8,6 +8,7 @@ import { Sorter } from '../../helpers/Sorter'
 import { Tag } from 'antd';
 import Drawer from '../Drawer/Drawer'
 import CustomSelect from '../CustomSelect/CustomSelect'
+import'./tickets.css'
 
 
 
@@ -68,12 +69,12 @@ const columns = [
     render: (_, { status }) => (
       <>
         {status.map(tag => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
+          let color = tag.length > 5 ? 'blue' : 'green';
           if (tag.toLowerCase() === 'pending') {
             color = 'yellow';
           }
           if (tag.toLowerCase() === 'resolved') {
-            color = 'gray';
+            color = 'grey';
           }
           return (
             <Tag color={color} key={tag}>
