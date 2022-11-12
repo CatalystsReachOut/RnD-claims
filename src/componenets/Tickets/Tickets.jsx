@@ -2,12 +2,12 @@ import React, { useRef } from 'react'
 import { IoMdSearch } from 'react-icons/io'
 import { Tabs, TabList, Tab, Progress, Textarea, TabPanel, TabPanels } from '@chakra-ui/react'
 import Table from '../Table/Table'
-import SelectInput from '../SelectInput/SelectInput'
 
 import { BiDotsVerticalRounded } from 'react-icons/bi'
 import { Sorter } from '../../helpers/Sorter'
 import { Tag } from 'antd';
 import Drawer from '../Drawer/Drawer'
+import CustomSelect from '../CustomSelect/CustomSelect'
 
 
 
@@ -135,201 +135,137 @@ const Tickets = () => {
 
   const openClose = useRef(false);
 
-  const open = () => {
-    openClose.current.style.display = "block";
+  const open = () => {    
+    openClose.current.classList.add("block");
+    openClose.current.classList.remove("hidden");
   }
 
   const close = (e) => {
 
-    if (e.target.matches("#close-button")) {
-
-      openClose.current.style.display = "none";
+    if (e.target.matches("#close-button")){
+      openClose.current.classList.remove("block");
+      openClose.current.classList.add("hidden");
     }
   }
 
 
-  const selectOptions = [
-    {
-      name: "Priority",
-      inputs: [
-        {
-          label: "Priority",
+  const filterPriorityOptions = [
+       {
+          label: <div>Priority</div>,
           value: 'null',
-          selected: true
         },
         {
-          label: "1",
+          label: <div>1</div>,
           value: '1',
-          selected: false
         },
         {
-          label: "2",
+          label: <div>2</div>,
           value: '2',
-          selected: false
         },
         {
-          label: "3",
+          label: <div>3</div>,
           value: '3',
-          selected: false
         },
       ]
-    },
-
-    {
-      name: "Severity", inputs: [
-        {
-          label: "Severity",
+ const filterSeverityOptions = [
+      {
+          label: <div>Severity</div>,
           value: "null",
-          selected: true
         },
         {
-          label: "Urgent",
+          label: <div>Urgent</div>,
           value: "Urgent",
-          selected: false
         },
         {
-          label: "High",
+          label: <div>High</div>,
           value: "High",
-          selected: false
         },
         {
-          label: "Normal",
+          label: <div>Normal</div>,
           value: "Normal",
-          selected: false
         },
         {
-          label: "Low",
+          label: <div>Low</div>,
           value: "Low",
-          selected: false
-        }]
-    },
+        }
+      ]
 
-    {
-      name: "Client", inputs: [
-        {
-          label: "Client",
-          value: "null",
-          selected: true
-        },
-        {
-          label: "Option1",
-          value: "Option1",
-          selected: false
-        },
-        {
-          label: "Option2",
-          value: "Option2",
-          selected: false
-        },
-        {
-          label: "Option3",
-          value: "Option3",
-          selected: false
-        },
-        {
-          label: "Option4",
-          value: "Option4",
-          selected: false
-        }
-      ]
-    },
+const filterClientOptions = [
 
-    {
-      name: "Assigned to", inputs: [
         {
-          label: "Assigned to",
+          label: <div>Client</div>,
           value: "null",
-          selected: true
         },
         {
-          label: "Option1",
+          label: <div>Option1</div>,
           value: "Option1",
-          selected: false
         },
         {
-          label: "Option2",
+          label: <div>Option2</div>,
           value: "Option2",
-          selected: false
         },
         {
-          label: "Option3",
+          label: <div>Option3</div>,
           value: "Option3",
-          selected: false
         },
         {
-          label: "Option4",
+          label: <div>Option4</div>,
           value: "Option4",
-          selected: false
         }
       ]
-    },
-    {
-      name: "Status", inputs: [
-        {
-          label: "Status",
-          value: "null",
-          selected: true
-        },
-        {
-          label: "Option1",
-          value: "Option1",
-          selected: false
-        },
-        {
-          label: "Option2",
-          value: "Option2",
-          selected: false
-        },
-        {
-          label: "Option3",
-          value: "Option3",
-          selected: false
-        },
-        {
-          label: "Option4",
-          value: "Option4",
-          selected: false
-        }
-      ]
-    },
 
-    {
-      name: "Status", inputs: [
+ const filterAssignmentOptions = [
         {
-          label: "Status",
+          label: <div>Assigned to</div>,
           value: "null",
-          selected: true
         },
         {
-          label: 1,
-          value: 1,
-          selected: false
+          label: <div>Option1</div>,
+          value: "Option1",
         },
         {
-          label: 2,
-          value: 2,
-          selected: false
+          label: <div>Option2</div>,
+          value: "Option2",
         },
         {
-          label: 3,
-          value: 3,
-          selected: false
+          label: <div>Option3</div>,
+          value: "Option3",
         },
         {
-          label: 4,
-          value: 4,
-          selected: false
+          label: <div>Option4</div>,
+          value: "Option4",
         }
       ]
-    },
-  ]
+
+const filterStatusOptions = [
+        {
+          label: <div>Status</div>,
+          value: "null",
+        },
+        {
+          label: <div>Option1</div>,
+          value: "Option1",
+        },
+        {
+          label: <div>Option2</div>,
+          value: "Option2",
+        },
+        {
+          label: <div>Option3</div>,
+          value: "Option3",
+        },
+        {
+          label: <div>Option4</div>,
+          value: "Option4",
+        }
+      ]
 
 
 
 
   return (
-    <div className='md:max-h-[85vh]  max-h-[100vh]'>
-      <Drawer close={close} openClose={openClose} />
+    <div className='sm:max-h-[calc(100vh-60px)]'>
+      <Drawer close={close} ref={openClose}/>
       <div className='px-[2.5rem] py-[1.375rem]' >
 
 
@@ -343,7 +279,7 @@ const Tickets = () => {
             <IoMdSearch className=' h-[25px] w-[25px] mr-auto' />
 
           </div>
-          <button onClick={() => open()} className='flex items-center gap-4 buttons-color text-center text-s py-[0.875rem] px-[2.5rem] md:ml-[1.5rem] mx-[0] mt-[10px] md:mt-0 rounded'>
+          <button onClick={open} className='flex items-center gap-4 buttons-color text-center text-s py-[0.875rem] px-[2.5rem] md:ml-[1.5rem] mx-[0] mt-[10px] md:mt-0 rounded'>
 
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M11.8333 6.83329H6.83334V11.8333H5.16667V6.83329H0.166672V5.16663H5.16667V0.166626H6.83334V5.16663H11.8333V6.83329Z" fill="white" />
@@ -360,13 +296,24 @@ const Tickets = () => {
               <Tab _selected={{ borderBottom: "solid 2px #29B475", color: "#2E2C34" }} className="text-xs text-[#84818A] font-[600] text-quarternary p-[0.4rem]" textAlign="center" mr="1rem">Active (20)</Tab>
               <Tab _selected={{ borderBottom: "solid 2px #29B475", color: "#2E2C34" }} className="text-xs text-[#84818A] font-[600] text-quarternary p-[0.4rem]" textAlign="center">Resolved (20)</Tab>
             </TabList>
-            <div className='flex max-w-[100%] scrollbar-hide ml-auto md:items-center gap-x-2 overflow-scroll mt-[10px] md:mt-0 justify-start'>
+            <div className='flex max-w-[100%]  ml-auto md:items-center gap-x-2  mt-[10px] md:mt-0 justify-start'>
               <p className='text-s font-medium whitespace-nowrap flex items-center'>Filter by:</p>
 
-              <SelectInput options={selectOptions[0]} />
-              <SelectInput options={selectOptions[1]} />
-              <SelectInput options={selectOptions[2]} />
-              <SelectInput options={selectOptions[3]} />
+              <div className="w-[90px]">
+                <CustomSelect options={filterPriorityOptions} />
+              </div>
+              <div className="w-[110px]">
+                <CustomSelect options={filterSeverityOptions} />
+              </div>
+              <div className='w-[110px]'>
+                <CustomSelect options={filterClientOptions} />
+              </div>
+              <div className='w-[110px]'>
+                <CustomSelect options={filterAssignmentOptions} />
+              </div>
+              <div className='w-[110px]'>
+                <CustomSelect options={filterStatusOptions} />
+              </div>
 
             </div>
 
@@ -383,7 +330,7 @@ const Tickets = () => {
 
               </TabPanel>
               <TabPanel>
-                <Table columns={columns} dataSource={data1} pagination={{ pageSize: 50 }} scroll={{ y: '200px' }} className="whitespace-none" />
+                <Table columns={columns} dataSource={data1} pagination={{ pageSize: 50 }} className="whitespace-none overflow-x-auto" />
               </TabPanel>
             </TabPanels>
           </div>

@@ -5,7 +5,7 @@ import { FiSearch } from 'react-icons/fi'
 import { GiHamburgerMenu } from 'react-icons/gi'
 
 
-const Navbar = ({showSideBar, hideSidebar}) => {
+const Navbar = ({showSideBar}) => {
   return (
     <div className='flex z-[200] absolute flex-auto justify-center items-center px-[2.5rem] py-[1.5rem] bg-[#FBFAFC] h-[4.375rem] drop-shadow-md w-full'>
 

@@ -16,17 +16,17 @@ const SideMenu = (props, ref) => {
 
 
     return (
-        <div className='sm:w-[100%] min-h-[100vh] h-[100%] w-full bg-[#EDF8F1] px-[0.75rem] py-[2rem] justify-between sm:flex sm:static flex-col hidden' ref={ref}>
+        <div className='sm:w-[20%] w-[100%] bg-[#EDF8F1] px-[0.75rem] py-[2rem] justify-between sm:flex sm:static flex-col  md:z-0 min-h-[100vh] hidden' ref={ref}>
 
             <div className='w-full flex justify-between items-center p-[0.5rem]'>
-                <div className='flex items-center '>
+                <div className='flex items-center'>
                     <img src={Logo} className="mr-[0.5rem]" />
-                    <div className='font-sans font-medium leading-[20px] text-[20px] whitespace-nowrap text-[#16252D]'>RnD Claims</div>
+                    <div className='font-sans font-medium leading-[20px] text-[20px] md:whitespace-nowrap text-[#16252D]'>RnD Claims</div>
                 </div>
-                <GrClose className='sm:hidden' onClick={() => ref.current.style.display = "none"} />
+                <GrClose className='sm:hidden' onClick={props.hideSideBar} />
             </div>
 
-            <div className='md:relative '>
+            <div className=''>
 
                 <div className='md:mt-[3rem] md:flex-1 flex md:block scrollbar-hide overflow-scroll flex-row '>
                 </div>

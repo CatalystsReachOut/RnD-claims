@@ -11,31 +11,31 @@ const Dashboard = () => {
 
   const showSideBar = (e) => {
     e.preventDefault();
-    sideRef.current.style.display = "flex",
-    sideRef.current.style.position ="absolute",
-    sideRef.current.style.zIndex ="999"
+    sideRef.current.classList.remove("hidden");
+    sideRef.current.classList.remove("static");
+    sideRef.current.classList.add ("flex");
+    sideRef.current.classList.add("fixed");
+    sideRef.current.classList.add("z-[999]");
+
   }
+
   const hideSideBar = (e) => {
     e.preventDefault();
-    sideRef.current.style.display = "none",
-    sideRef.current.style.position ="absolute",
-    sideRef.current.style.zIndex ="999"
+    sideRef.current.classList.add("static");
+    sideRef.current.classList.add("hidden");
   }
 
   return (
-    <div className='sm:flex flex-col sm:flex-row'>
+    <div className='sm:flex flex-col sm:flex-row min-h-[100vh] h-full'>
 
-      <div className='w-[20%]  overflow-y-scroll scrollbar-hide'>
-
-      <SideBar ref={sideRef}/>
-      </div>
-      <div className='md:w-[80%] w-[100%] '>
+      <SideBar ref={sideRef} hideSideBar={hideSideBar}/>
+      <div className='sm:w-[80%] w-[100%] '>
 
         <div className="relative w-full">
-          <Navbar showSideBar={showSideBar} hideSideBar={hideSideBar} />
+          <Navbar showSideBar={showSideBar}/>
         </div>
 
-        <div className='pt-[60px]  max-w-[100%] overflow-y-scroll overflow-x-hidden'>
+        <div className='pt-[60px] h-full max-w-[100%] overflow-y-auto overflow-x-hidden'>
           <Tickets />
         </div>
 

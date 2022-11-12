@@ -8,18 +8,16 @@ import plus from '../../assets/Plus.svg'
 
 
 
-const Drawer = ({close, openClose }) => {
+const DrawerMenu = ({close}, ref) => {
     return (
         <div 
-        style={{
-            display: "none",
-        }}
-        className='h-[100vh] w-[100vw] z-[200]' ref={openClose} >
-            <div className="overlay w-[100%] h-[100%] top-0 left-0 z-[200] absolute bg-[#000] opacity-50"></div>
-            <form 
-            className='max-h-100vh overflow-y-scroll max-h-[100vh]'
+        className='w-[100vw] hidden' ref={ref} >
+            <div className="overlay w-[100%] h-full top-0 left-0 z-[200] absolute bg-[#000] opacity-50"></div>
+            <form className='max-h-[100vh]'
+
             style={{
                 position: "absolute",
+                overflowY:"scroll",
                 right: "0px",
                 top: "0px",
                 width: "500px",
@@ -27,12 +25,11 @@ const Drawer = ({close, openClose }) => {
                 zIndex: "999",
                 background: "#fff",
                 borderTop: "1px solid #e9e9e9",
-                minHeight: "100vh",
                 transition: "0.5s"
             }}  id="formContainer" onSubmit={(e) => e.preventDefault()}>
                 <div className='flex justify-between items-center'>
                     <h1 className='text-2xl text-[1.75rem] mb-[1rem]'>Name of the ticket</h1>
-                    <GrClose onClick={(e) => close(e)} className="cursor-pointer" id='close-button' />
+                    <GrClose onClick={(e) => close(e)} className="cursor-pointer text-[1.5rem] mb-[1rem]" id='close-button' />
                 </div>
 
                 <div className='w-[180px]'>
@@ -105,7 +102,7 @@ const Drawer = ({close, openClose }) => {
                     </div>
 
                     <div className='flex-1'>
-                        <div className="w-[250px]">
+                        <div className="w-[248px]">
                             <CustomSelect options={engagementOptions} />
                         </div>
                     </div>
@@ -121,7 +118,10 @@ const Drawer = ({close, openClose }) => {
 
                 <div className='flex flex-col items-center border-secondary border-dashed border-2 p-4 rounded'>
                     <TbCloudUpload className='text-[3.75rem] text-secondary' />
-                    <p className='font-Manrope leading-6 font-medium text-[17px] text-primary'>Upload Media here</p>
+                    <div className='relative'>
+                        <input type="file" className='w-[188px] absolute opacity-0 cursor-pointer' />
+                        <p className='font-Manrope leading-6 font-medium text-[17px] text-primary'>Upload Media here</p>
+                    </div>
                     <p className='font-Manrope leading-4 text-[0.75em] font-medium text-secondary'>Image can be size of 512 PX by 512 PX Only</p>
                 </div>
 
@@ -136,6 +136,8 @@ const Drawer = ({close, openClose }) => {
 
     )
 }
+
+const Drawer = React.forwardRef(DrawerMenu);
 
 export default Drawer
 
@@ -156,7 +158,6 @@ const statusOptions = [
     {
         label: <div className='flex items-center gap-2'><BsSquareFill className='text-orange-500 capitalize' /> In Progress</div>,
         value: "in progress",
-        bgcolor: "var(--highlight-green-color)"
     },
     {
         label: <div className='flex items-center gap-2'><BsSquareFill className='text-yellow-600 capitalize' /> In review</div>,

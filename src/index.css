@@ -10,6 +10,8 @@
         --highlight-light-black-color: #2E2C34;
         font-family: 'Manrope', 'sans-serif';
         box-sizing: border-box;
+        min-height: 100vh;
+        height: auto
     }
 }
 
